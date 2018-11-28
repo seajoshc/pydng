@@ -116,6 +116,7 @@ def main():
     parsed = parse_source(source)
     adjectives = parsed[0]
     names = parsed[1]
+    names.append("rossum") # ;)
 
     print(random_docker_name(adjectives, names))
 
