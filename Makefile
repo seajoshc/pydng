@@ -1,5 +1,14 @@
 pypi:
-	python setup.py upload
+	if [ -d "dist/" ]; then rm -Rf dist/; fi
+	python setup.py sdist bdist_wheel
+	twine upload dist/*
+	git tag v$(grep __version__ pydng.py | cut -d'"' -f 2)
+	git push --tags
 
 package:
-	python setup.py build
+	if [ -d "dist/" ]; then rm -Rf dist/; fi
+	python setup.py sdist bdist_wheel
+
+tag:
+	git tag v$(grep __version__ pydng.py | cut -d'"' -f 2)
+	git push --tags
