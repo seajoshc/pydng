@@ -4,7 +4,7 @@ pydng
 Docker Names Generator ported to Python
 """
 __author__ = "Josh Campbell"
-__version__ = "0.2.0"
+__version__ = "1.0.0"
 __license__ = "MIT"
 
 from random import choice
