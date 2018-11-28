@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 VERSION = re.search(
     r'^__version__\s*=\s*"(.*)"',
-    open('pydng.py').read(),
+    open('pydng/pydng.py').read(),
     re.M
 ).group(1)
 
@@ -21,7 +21,7 @@ setuptools.setup(
     url="https://github.com/irlrobot/pydng",
     packages=setuptools.find_packages(),
     entry_points={
-        'console_scripts': ['pydng=pydng:main'],
+        'console_scripts': ['pydng=pydng.pydng:main'],
     },
     classifiers=[
         "Programming Language :: Python :: 3",
