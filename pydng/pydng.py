@@ -20,10 +20,10 @@ def fetch_latest_source():
     Grabs the latest names-generator.go from moby/moby
 
     Parameters
-    ==========
+    ----------
 
     Returns
-    =======
+    -------
     str
         The names-generator.go source code.
     """
@@ -94,7 +94,7 @@ def random_docker_name(adjectives, names):
     Creates a random name for a Docker container based on two lists.
 
     Parameters
-    ==========
+    ----------
     adjectives : list
         A list of adjectives (strings).
 
@@ -102,7 +102,7 @@ def random_docker_name(adjectives, names):
         A list of names (strings).
 
     Returns
-    =======
+    -------
     string
         A name for a Docker container.
     """
@@ -110,15 +110,31 @@ def random_docker_name(adjectives, names):
     return "{}_{}".format(choice(adjectives), choice(names))
 
 
-def main():
-    """ main function """
+def generate_name():
+    """
+    Wrapper to fetch the latest source, parse it for adjectives and names,
+    and then generating a random name in the Docker container style.
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+    str
+        A name for a Docker container.
+    """
     source = fetch_latest_source()
     parsed = parse_source(source)
     adjectives = parsed[0]
     names = parsed[1]
-    names.append("rossum") # ;)
+    names.append("rossum")  # ;)
 
-    print(random_docker_name(adjectives, names))
+    return random_docker_name(adjectives, names)
+
+
+def main():
+    """ main function """
+    print(generate_name())
 
 
 if __name__ == "__main__":
