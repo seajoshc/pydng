@@ -3,10 +3,6 @@
 pydng
 Docker Names Generator ported to Python
 """
-__author__ = "Josh Campbell"
-__version__ = "1.1.0"
-__license__ = "MIT"
-
 from random import choice
 import urllib.request
 
@@ -15,7 +11,34 @@ SOURCE_URL = "https://raw.githubusercontent.com/moby/moby/master/pkg/"\
              "namesgenerator/names-generator.go"
 
 
-def fetch_latest_source():
+def main():
+    """ main function """
+    print(generate_name())
+
+
+def generate_name():
+    """
+    Wrapper to fetch the latest source, parse it for adjectives and names,
+    and then generating a random name in the Docker container style.
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+    str
+        A name for a Docker container.
+    """
+    source = _fetch_latest_source()
+    parsed = _parse_source(source)
+    adjectives = parsed[0]
+    names = parsed[1]
+    names.append("rossum")  # ;)
+
+    return _random_docker_name(adjectives, names)
+
+
+def _fetch_latest_source():
     """
     Grabs the latest names-generator.go from moby/moby
 
@@ -33,7 +56,7 @@ def fetch_latest_source():
     return text
 
 
-def parse_source(source):
+def _parse_source(source):
     """
     Parses the names-generator.go source to find adjectives and names.
 
@@ -89,7 +112,7 @@ def parse_source(source):
     return (left, right)
 
 
-def random_docker_name(adjectives, names):
+def _random_docker_name(adjectives, names):
     """
     Creates a random name for a Docker container based on two lists.
 
@@ -108,33 +131,6 @@ def random_docker_name(adjectives, names):
     """
     # Following the Docker container name format.
     return "{}_{}".format(choice(adjectives), choice(names))
-
-
-def generate_name():
-    """
-    Wrapper to fetch the latest source, parse it for adjectives and names,
-    and then generating a random name in the Docker container style.
-
-    Parameters
-    ----------
-
-    Returns
-    -------
-    str
-        A name for a Docker container.
-    """
-    source = fetch_latest_source()
-    parsed = parse_source(source)
-    adjectives = parsed[0]
-    names = parsed[1]
-    names.append("rossum")  # ;)
-
-    return random_docker_name(adjectives, names)
-
-
-def main():
-    """ main function """
-    print(generate_name())
 
 
 if __name__ == "__main__":
