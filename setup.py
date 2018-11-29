@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 VERSION = re.search(
     r'^__version__\s*=\s*"(.*)"',
-    open('pydng/pydng.py').read(),
+    open('pydng/__init__).py').read(),
     re.M
 ).group(1)
 
