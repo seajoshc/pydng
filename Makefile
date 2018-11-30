@@ -18,3 +18,7 @@ tag:
 test:
 	@pytest --cov=pydng --cov-report=term-missing
 	@pytest tests/integration/test_pydng.py
+
+docker:
+	@docker build . -t irlrobot/pydng:latest -t irlrobot/pydng:$$(grep __version__ pydng/__init__.py | cut -d'"' -f 2)
+	@docker push irlrobot/pydng
