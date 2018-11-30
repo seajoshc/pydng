@@ -6,6 +6,5 @@ __version__ = "1.1.1"
 
 # API
 __all__ = [
-    "__version__",
     "generate_name",
 ]
