@@ -17,9 +17,14 @@ def test_generate_name(mocked_request):
         source = go_source.read()
 
     mocked_request.return_value.read.return_value = source
+    generated_name = generate_name()
 
     # Check if the "adjective_name" pattern is followed.
-    assert re.match(r'\b[a-z]*_[a-z]*\b', generate_name())
+    assert re.match(r'\b[a-z]*_[a-z]*\b', generated_name)
+
+    # Check if the adjective and name are valid in the source.
+    assert generated_name.split("_")[0] in source.decode('utf-8')
+    assert generated_name.split("_")[1] in source.decode('utf-8')
 
 
 def test_fetch_latest_source():
