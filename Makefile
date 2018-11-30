@@ -14,3 +14,7 @@ package:
 tag:
 	@git tag v$$(grep __version__ pydng/__init__.py | cut -d'"' -f 2)
 	@git push --tags
+
+test:
+	@pytest --cov=pydng --cov-report=term-missing
+	@pytest tests/integration/test_pydng.py
