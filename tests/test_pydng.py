@@ -42,7 +42,7 @@ def test_fetch_latest_source():
 
 
 def test_parse_source():
-    """ Ensure a tuple of two lists is returned """
+    """ Ensure a tuple of two non-empty lists is returned """
     with open('tests/names-generator.go', 'r') as go_source:
         source = go_source.read()
 
@@ -51,6 +51,8 @@ def test_parse_source():
     assert type(parsed_source) == tuple
     assert type(parsed_source[0]) == list
     assert type(parsed_source[1]) == list
+    assert len(parsed_source[0]) > 0
+    assert len(parsed_source[1]) > 0
 
 
 def test_random_docker_name():
